@@ -165,11 +165,6 @@ const displayData = () => {
                 language = key;
             }
         });
-        // console.log(language);
-
-        // if (language === "ar") {
-        //   document.getElementById("translations").style.direction = "ltr";
-        // }
 
         //!====================================================
     });

@@ -5,7 +5,8 @@ self.addEventListener("install", function(event) {
                 "../index.html",
                 "./main.js",
                 "../sass/style.css",
-                "./manifest.webmanifest"
+                "./manifest.webmanifest",
+                "../images/logo.png"
             );
         })
     );

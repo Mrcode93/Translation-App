@@ -7,12 +7,12 @@
     "description": "Translator",
     "theme_color": "transparent",
     "icons": [{
-            "src": "./images/oie_png.png",
+            "src": "./images/logo.png",
             "type": "png",
             "sizes": "512x512"
         },
         {
-            "src": "./images/oie_png.png",
+            "src": "./images/logo.png",
             "type": "image/png",
             "sizes": "193x193"
         }

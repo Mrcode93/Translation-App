@@ -5,18 +5,16 @@
     "display": "standalone",
     "background_color": "#fff",
     "description": "Translator",
-    "theme_color": "transparent",
+    "theme_color": "#333",
     "icons": [{
-            "src": "./images/logo.png",
-            "type": "png",
-            "sizes": "512x512"
+            "src": "./logo.png",
+            "type": "image/png",
+            "sizes": "192x192"
         },
         {
-            "src": "./images/logo.png",
+            "src": "./logo.png",
             "type": "image/png",
-            "sizes": "193x193"
+            "sizes": "512x512"
         }
     ]
-
-
 }

@@ -2,9 +2,9 @@ self.addEventListener("install", function(event) {
     event.waitUntil(
         caches.open("sw.cache").then(function(cache) {
             return cache.add(
-                "../index.html",
-                "./main.js",
-                "../sass/style.css",
+                "./index.html",
+                "./js/main.js",
+                "./sass/style.css",
                 "./manifest.webmanifest",
                 "../images/logo.png"
             );

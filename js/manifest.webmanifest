@@ -1,0 +1,22 @@
+{
+    "short_name": "Translation App",
+    "name": "Translation App",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#fff",
+    "description": "Translator",
+    "theme_color": "transparent",
+    "icons": [{
+            "src": "./images/oie_png.png",
+            "type": "png",
+            "sizes": "512x512"
+        },
+        {
+            "src": "./images/oie_png.png",
+            "type": "image/png",
+            "sizes": "193x193"
+        }
+    ]
+
+
+}

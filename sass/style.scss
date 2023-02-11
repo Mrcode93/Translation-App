@@ -127,17 +127,9 @@ body {
         #input-text {
             border: none;
             outline: none;
-            &:focus {
-                border: none;
-                outline: none;
-            }
             min-width: 100%;
             padding: 10px;
             color: #0A1128;
-            &::placeholder {
-                color: #F46036;
-                opacity: .7;
-            }
             height: 80px;
             font-size: 1.1em;
             border-radius: 10px;
@@ -145,6 +137,14 @@ body {
             -moz-border-radius: 10px;
             -ms-border-radius: 10px;
             -o-border-radius: 10px;
+            &:focus {
+                border: none;
+                outline: none;
+            }
+            &::placeholder {
+                color: #F46036;
+                opacity: .7;
+            }
         }
         @include shadow;
     }

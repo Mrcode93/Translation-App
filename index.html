@@ -1,60 +1,73 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
-    <meta name="description" content="Experience seamless translation between
+    <meta
+      name="description"
+      content="Experience seamless translation between
     English and Arabic with our user-friendly translator app. Simply input your
     text and watch as it instantly transforms into your desired language.
-    Available on all devices, try it now for accurate and quick translations." />
+    Available on all devices, try it now for accurate and quick translations."
+    />
     <meta http-equiv="X-UA-Compatible " content="IE=edge " />
     <meta name="viewport " content="width=device-width, initial-scale=1.0 " />
-    <link rel="stylesheet " href="sass/style.css " />
+    <link rel="stylesheet " href="./sass/style.css " />
     <!-- icon of website -->
 
     <link rel="icon " href="./logo.png " type="image/png " />
 
     <link rel="preconnect " href="https://fonts.googleapis.com " />
     <link rel="preconnect " href="https://fonts.gstatic.com " crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap " rel="stylesheet " />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap "
+      rel="stylesheet "
+    />
     <title>Translation App</title>
     <link rel="manifest " href="./manifest.webmanifest " />
 
     <script>
-        if ("serviceWorker " in navigator) {
-            navigator.serviceWorker.register("./sw.js ");
-        }
+      if ("serviceWorker " in navigator) {
+        navigator.serviceWorker.register("sw.js ");
+      }
     </script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="container">
-        <h1>Translation App</h1>
-        <p>
-            By :
-            <a href="https://www.mrcodeiq.com ">Mr.codeIq</a>
-        </p>
+      <h1>Translation App</h1>
+      <p>
+        By :
+        <a href="https://www.mrcodeiq.com ">Mr.codeIq</a>
+      </p>
 
-        <form id="form ">
-            <div id="input-section ">
-                <textarea id="input-text " placeholder="put the text here... "></textarea>
-            </div>
-            <button id="submit " type="button ">Translate</button>
-        </form>
-        <span class="loading">Load&nbsp;ng</span>
-        <div id="output-section ">
-            <div id="output-text " readonly></div>
-            <ion-icon name="copy-outline "></ion-icon>
+      <form id="form">
+        <div id="input-section">
+          <textarea
+            id="input-text"
+            placeholder="put the text here... "
+          ></textarea>
         </div>
-        <div class="history display">
-            <h3>History</h3>
-        </div>
+        <button id="submit" type="button">Translate</button>
+      </form>
+      <span class="loading">Load&nbsp;ng</span>
+      <div id="output-section">
+        <div id="output-text" readonly></div>
+        <ion-icon name="copy-outline"></ion-icon>
+      </div>
+      <div class="history display">
+        <h3>History</h3>
+      </div>
     </div>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11 "></script>
-    <script type="module " src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js "></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js "></script>
-    <script src="./js/main.js " type="module "></script>
-</body>
-
+    <script
+      type="module"
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js "
+    ></script>
+    <script
+      nomodule
+      src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js "
+    ></script>
+    <script src="./js/main.js"></script>
+  </body>
 </html>

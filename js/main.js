@@ -6,34 +6,57 @@ const resultFieldText = document.querySelector("#output-text");
 const loader = document.querySelector(".loading");
 const submitButton = document.querySelector("#submit");
 
-function getData() {
+//! get the language of text field.
+textField.addEventListener("input", (e) => {
+  e.preventDefault();
   const textFieldValue = textField.value.trim();
+
+  const options = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-RapidAPI-Key": "745e563a14msh1097188a84d9738p14199bjsn34e362db911d",
+      "X-RapidAPI-Host": "community-language-detection.p.rapidapi.com",
+    },
+    // body: JSON.stringify({ language: textFieldValue }),
+    body: `{"q":"${textFieldValue}"}`,
+  };
+
+  fetch("https://community-language-detection.p.rapidapi.com/detect", options)
+    .then((response) => response.json())
+    .then((response) => {
+      let language = response.data.detections[0].language;
+      getData(language);
+    })
+    .catch((err) => console.error(err));
+});
+
+function getData(language) {
+  const textFieldValue = textField.value;
+  console.log(language);
 
   if (!textFieldValue) {
     resultField.classList.remove("show");
     return;
   }
-
-  const langDict = {
-    ar: /[\u0600-\u06FF]/,
-    en: /^[a-zA-Z]+$/,
-  };
-
-  let from = "";
-  let to = "";
-
-  Object.entries(langDict).forEach(([key, value]) => {
-    if (value.test(textFieldValue)) {
-      from = key;
-    } else if (!to) {
-      to = key;
-    }
-  });
+  let from;
+  let to;
+  if (language === "en") {
+    from = "en";
+    to = "ar";
+    textField.style.direction = "ltr";
+    resultFieldText.style.direction = "rtl";
+  } else if (language === "ar") {
+    from = "ar";
+    to = "en";
+    textField.style.direction = "rtl";
+    resultFieldText.style.direction = "ltr";
+  }
 
   fetchApi(from, to, textFieldValue);
 }
 
-//function when presse enter translate text
+//! function when presse enter translate text
 document.getElementById("form").addEventListener("keydown", handleKeyDown);
 submitButton.addEventListener("click", handleClick);
 
@@ -88,6 +111,7 @@ function fetchApi(from, to, text) {
 }
 // }
 
+//! copy the text to the clipboard
 document.querySelector("ion-icon").addEventListener("click", function () {
   const outputText = document.getElementById("output-text").innerText;
   const tempInput = document.createElement("input");
@@ -119,10 +143,10 @@ function saveData(text, result, from, to) {
   }
   // Add new translation data
   translations.push({
-    text: from,
-    text,
-    translation: to,
-    result,
+    text: text,
+    translation: result,
+    original: from,
+    another: to,
   });
   localStorage.setItem("translations", JSON.stringify(translations));
 }
@@ -141,33 +165,50 @@ const displayData = () => {
 
   translationHistory.reverse();
   translationHistory.forEach((data, index) => {
-    let historyDiv = document.createElement("div");
-
-    historyDiv.id = `item-${index}`;
-    historyDiv.classList.add("item");
-    historyDiv.innerHTML = `
-    <p id='original'>${data.text}</p>
-    <p id='translations'>${data.translation}</p>
-    <ion-icon id='delete-${index}' class='delete' name="trash-outline"></ion-icon>
-  `;
-    historyContainer.appendChild(historyDiv);
-    historyDivs.push(historyDiv);
     //! check if translation text from which language
-    const translationText = data.translation.trim();
-
-    const langDict = {
-      ar: /[\u0600-\u06FF]/,
-      en: /^[a-zA-Z]+$/,
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-RapidAPI-Key": "745e563a14msh1097188a84d9738p14199bjsn34e362db911d",
+        "X-RapidAPI-Host": "community-language-detection.p.rapidapi.com",
+      },
+      // body: JSON.stringify({ language: textFieldValue }),
+      body: `{"q":"${data.translation.trim()}"}`,
     };
 
-    let language = "";
+    fetch("https://community-language-detection.p.rapidapi.com/detect", options)
+      .then((response) => response.json())
+      .then((response) => {
+        let language = response.data.detections[0].language;
 
-    Object.entries(langDict).forEach(([key, value]) => {
-      if (value.test(translationText)) {
-        language = key;
-      }
-    });
+        if (language === "en") {
+          let historyDiv = document.createElement("div");
 
+          historyDiv.id = `item-${index}`;
+          historyDiv.classList.add("item");
+          historyDiv.innerHTML = `
+          <p id='original'>${data.text}</p>
+          <p id='translations' dir="ltr">${data.translation}</p>
+          <ion-icon id='delete-${index}' class='delete' name="trash-outline"></ion-icon>
+        `;
+          historyContainer.appendChild(historyDiv);
+          historyDivs.push(historyDiv);
+        } else {
+          let historyDiv = document.createElement("div");
+
+          historyDiv.id = `item-${index}`;
+          historyDiv.classList.add("item");
+          historyDiv.innerHTML = `
+          <p id='original'>${data.text}</p>
+          <p id='translations' dir="rtl">${data.translation}</p>
+          <ion-icon id='delete-${index}' class='delete' name="trash-outline"></ion-icon>
+        `;
+          historyContainer.appendChild(historyDiv);
+          historyDivs.push(historyDiv);
+        }
+      })
+      .catch((err) => console.error(err));
     //!====================================================
   });
   //! delete history item
